@@ -75,7 +75,6 @@ function App() {
     event.preventDefault();
     setActiveConfirm((s) => !s);
     setActiveResult((s) => !s);
-    setCount(count + 1);
   };
 
   const handleInput = (event) => {
