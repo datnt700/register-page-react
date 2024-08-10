@@ -3,6 +3,7 @@ import './app.scss';
 import blurImage from './assets/blur-radial.svg';
 import TextInput from './components/TextInput';
 import CheckBoxInput from './components/CheckBoxInput';
+import Button from './components/Button';
 function App() {
   const [activeRegister, setActiveRegister] = useState(true);
   const [activeTopic, setActiveTopic] = useState(false);
@@ -117,13 +118,11 @@ function App() {
               {error}
             </p>
           )}
-          <button
+          <Button
             onClick={handleRegister}
-            type="submit"
             className="btn registration"
-          >
-            Continue
-          </button>
+            name="Continue"
+          />
         </form>
       </section>
       <section
@@ -142,9 +141,7 @@ function App() {
               classInput="checkbox-control"
             />
           ))}
-          <button onClick={handleTopic} className="btn topic">
-            Continue
-          </button>
+          <Button onClick={handleTopic} className="btn topic" name="Continue" />
         </form>
       </section>
       <section
@@ -164,10 +161,11 @@ function App() {
                 ))}
             </ul>
           </div>
-
-          <button onClick={handleConfirm} className="btn confirm">
-            Confirm
-          </button>
+          <Button
+            onClick={handleConfirm}
+            className="btn confirm"
+            name="Confirm"
+          />
         </div>
       </section>
       <section className={`${activeResult ? 'form four active' : 'form four'}`}>
