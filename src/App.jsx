@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import './app.scss';
 import blurImage from './assets/blur-radial.svg';
-
+import TextInput from './components/TextInput';
+import CheckBoxInput from './components/CheckBoxInput';
 function App() {
   const [activeRegister, setActiveRegister] = useState(true);
   const [activeTopic, setActiveTopic] = useState(false);
@@ -91,28 +92,26 @@ function App() {
       >
         <h3 className="title main">Register</h3>
         <form onSubmit={handleRegister} className="register">
-          <div className="register-input">
-            <label for="nameInput">Name</label>
-            <input
-              type="text"
-              id="nameInput"
-              value={name}
-              placeholder="enter your name"
-              onChange={handleName}
-              required
-            />
-          </div>
-          <div className="register-input">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="enter your email"
-              value={email}
-              onChange={handleEmail}
-              required
-            />
-          </div>
+          <TextInput
+            type="text"
+            value={name}
+            placeholder="enter your name"
+            label="Name"
+            id="nameInput"
+            onChange={handleName}
+            classDiv="form-group"
+            classInput="form-control"
+          />
+          <TextInput
+            type="email"
+            value={email}
+            placeholder="enter your email"
+            label="Email"
+            id="emailInput"
+            onChange={handleEmail}
+            classDiv="form-group"
+            classInput="form-control"
+          />
           {error && (
             <p className="error-message" style={{ color: 'red' }}>
               {error}
@@ -133,21 +132,15 @@ function App() {
         <h3 className="title sous">Which topics you are interested in?</h3>
         <form className="topic-list">
           {topics.map((topic) => (
-            <label
-              key={topic.id}
-              className={`topic-label ${topic.checked ? 'checked' : ''}`}
-            >
-              <input
-                type="checkbox"
-                id={topic.id}
-                className="items"
-                value={topic.value}
-                checked={topic.checked}
-                onChange={handleInput}
-                required
-              />
-              {topic.value}
-            </label>
+            <CheckBoxInput
+              value={topic.value}
+              label={topic.value}
+              id={topic.id}
+              onChange={handleInput}
+              checked={topic.checked}
+              classLabel={`topic-label ${topic.checked ? 'checked' : ''}`}
+              classInput="checkbox-control"
+            />
           ))}
           <button onClick={handleTopic} className="btn topic">
             Continue

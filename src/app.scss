@@ -80,7 +80,8 @@ h3 {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  .register-input {
+  position: relative;
+  .form-group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -98,6 +99,11 @@ h3 {
       outline: none;
       font-size: 0.75rem;
     }
+  }
+  .error-message {
+    position: absolute;
+    bottom: 90px;
+    left: 0;
   }
 }
 
