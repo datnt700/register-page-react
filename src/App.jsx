@@ -4,6 +4,7 @@ import blurImage from './assets/blur-radial.svg';
 import TextInput from './components/TextInput';
 import CheckBoxInput from './components/CheckBoxInput';
 import Button from './components/Button';
+import Label from './components/Label';
 function App() {
   const [activeRegister, setActiveRegister] = useState(true);
   const [activeTopic, setActiveTopic] = useState(false);
@@ -92,26 +93,31 @@ function App() {
       >
         <h3 className="title main">Register</h3>
         <form onSubmit={handleRegister} className="register">
-          <TextInput
-            type="text"
-            value={name}
-            placeholder="enter your name"
-            label="Name"
-            id="nameInput"
-            onChange={handleName}
-            classDiv="form-group"
-            classInput="form-control"
-          />
-          <TextInput
-            type="email"
-            value={email}
-            placeholder="enter your email"
-            label="Email"
-            id="emailInput"
-            onChange={handleEmail}
-            classDiv="form-group"
-            classInput="form-control"
-          />
+          <div className="form-group">
+            <Label id="nameInput" label={'Name'} className={''} />
+            <TextInput
+              type="text"
+              value={name}
+              placeholder="enter your name"
+              label="Name"
+              id="nameInput"
+              onChange={handleName}
+              className="form-control"
+            />
+          </div>
+          <div className="form-group">
+            <Label id="nameInput" label={'Email'} className={''} />
+            <TextInput
+              type="email"
+              value={email}
+              placeholder="enter your email"
+              label="Email"
+              id="emailInput"
+              onChange={handleEmail}
+              className="form-control"
+            />
+          </div>
+
           {error && (
             <p className="error-message" style={{ color: 'red' }}>
               {error}
