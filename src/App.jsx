@@ -14,14 +14,13 @@ function App() {
   const [circle3, setCircle3] = useState(false);
 
   const [field, setField] = useState({ name: '', email: '' });
-  const [errors, setErrors] = useState({ name: '', email: '' });
   const [count, setCount] = useState(1);
   const [topics, setTopics] = useState([
     { id: 'sd', value: 'Software Development', checked: false },
     { id: 'ue', value: 'User Experience', checked: false },
     { id: 'gd', value: 'Graphic Design', checked: false },
   ]);
-  const [error, setError] = useState('');
+  const [error, setError] = useState({ name: '', email: '' });
   const handleName = (e) => {
     const { name, value } = e.target;
     setField((prevField) => ({
@@ -60,13 +59,11 @@ function App() {
       errorMessage.email = 'Invalid email format.';
       hasError = true;
     }
-    console.log('ero', errorMessage);
     if (hasError) {
       setError(errorMessage);
       return;
     }
 
-    // Các cập nhật trạng thái khác
     setActiveRegister((s) => !s);
     setActiveTopic((s) => !s);
     setCount(count + 1);
