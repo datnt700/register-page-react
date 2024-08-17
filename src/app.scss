@@ -51,8 +51,8 @@ h3 {
 }
 
 .form {
-  width: 280px;
-  height: 22rem;
+  width: 480px;
+  height: 23rem;
   margin: 10rem auto 0;
   padding: 2.5rem;
   border: 0.5px solid #a1a1a9;
@@ -99,11 +99,6 @@ h3 {
       outline: none;
       font-size: 0.75rem;
     }
-  }
-  .error-message {
-    position: absolute;
-    bottom: 90px;
-    left: 0;
   }
 }
 
@@ -213,11 +208,6 @@ input[type='checkbox'] {
 }
 
 @media screen and (min-width: 640px) {
-  .form {
-    width: 460px;
-    height: 21rem;
-  }
-
   .blur-2 {
     width: 20rem;
   }

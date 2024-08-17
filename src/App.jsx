@@ -12,8 +12,9 @@ function App() {
   const [activeResult, setActiveResult] = useState(false);
   const [circle2, setCircle2] = useState(false);
   const [circle3, setCircle3] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+
+  const [field, setField] = useState({ name: '', email: '' });
+  const [errors, setErrors] = useState({ name: '', email: '' });
   const [count, setCount] = useState(1);
   const [topics, setTopics] = useState([
     { id: 'sd', value: 'Software Development', checked: false },
@@ -22,9 +23,11 @@ function App() {
   ]);
   const [error, setError] = useState('');
   const handleName = (e) => {
-    const { value } = e.target;
-
-    setName(e.target.value);
+    const { name, value } = e.target;
+    setField((prevField) => ({
+      ...prevField,
+      [name]: value,
+    }));
   };
 
   const isEmailValid = (email) => {
@@ -33,31 +36,37 @@ function App() {
   };
 
   const handleEmail = (e) => {
-    const { value } = e.target;
-    setEmail(e.target.value);
+    const { email, value } = e.target;
+    setField((prevField) => ({
+      ...prevField,
+      [email]: value,
+    }));
   };
 
   const handleRegister = (event) => {
     event.preventDefault();
 
     let hasError = false;
-    let errorMessage = '';
-    if (!name.trim()) {
-      errorMessage += 'Name is required.';
-      hasError = true;
-    }
-    if (!email.trim()) {
-      errorMessage += 'Email is required.';
-      hasError = true;
-    } else if (!isEmailValid(email)) {
-      errorMessage += 'Invalid email format.';
-      hasError = true;
-    }
 
+    const errorMessage = { name: '', email: '' };
+    if (!field.name) {
+      errorMessage.name = 'Name is required.';
+      hasError = true;
+    }
+    if (!field.email) {
+      errorMessage.email = 'Email is required.';
+      hasError = true;
+    } else if (!isEmailValid(field.email)) {
+      errorMessage.email = 'Invalid email format.';
+      hasError = true;
+    }
+    console.log('ero', errorMessage);
     if (hasError) {
-      setError(errorMessage.trim());
+      setError(errorMessage);
       return;
     }
+
+    // Các cập nhật trạng thái khác
     setActiveRegister((s) => !s);
     setActiveTopic((s) => !s);
     setCount(count + 1);
@@ -97,32 +106,30 @@ function App() {
             <Label id="nameInput" label={'Name'} className={''} />
             <TextInput
               type="text"
-              value={name}
+              value={field.name}
               placeholder="enter your name"
               label="Name"
               id="nameInput"
               onChange={handleName}
               className="form-control"
+              name="name"
+              error={error.name}
             />
           </div>
           <div className="form-group">
             <Label id="nameInput" label={'Email'} className={''} />
             <TextInput
               type="email"
-              value={email}
+              value={field.email}
               placeholder="enter your email"
               label="Email"
               id="emailInput"
               onChange={handleEmail}
               className="form-control"
+              name="email"
+              error={error.email}
             />
           </div>
-
-          {error && (
-            <p className="error-message" style={{ color: 'red' }}>
-              {error}
-            </p>
-          )}
           <Button
             onClick={handleRegister}
             className="btn registration"
@@ -140,6 +147,7 @@ function App() {
               value={topic.value}
               label={topic.value}
               id={topic.id}
+              key={topic.id}
               onChange={handleInput}
               checked={topic.checked}
               classLabel={`topic-label ${topic.checked ? 'checked' : ''}`}
@@ -155,8 +163,8 @@ function App() {
         <div className="summary">
           <h3 className="title sous">Summary</h3>
           <div className="info-sum">
-            <p className="nameSum">{name}</p>
-            <p className="emailSum">{email}</p>
+            <p className="nameSum">{field.name}</p>
+            <p className="emailSum">{field.email}</p>
             <p className="topic-sum">Topics:</p>
             <ul className="item-list">
               {topics

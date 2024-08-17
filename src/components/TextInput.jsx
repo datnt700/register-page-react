@@ -7,17 +7,22 @@ const TextInput = ({
   id,
   onChange,
   className,
+  error,
 }) => {
   return (
-    <input
-      type={type}
-      id={id}
-      value={name}
-      placeholder={placeholder}
-      onChange={onChange}
-      className={className}
-      required
-    />
+    <>
+      <input
+        type={type}
+        id={id}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+        className={className}
+        name={name}
+        required
+      />
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+    </>
   );
 };
 

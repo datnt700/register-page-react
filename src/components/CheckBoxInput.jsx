@@ -8,7 +8,7 @@ const CheckBoxInput = ({
   classInput,
 }) => {
   return (
-    <label key={id} for={id} className={classLabel}>
+    <label key={id} htmlFor={id} className={classLabel}>
       <input
         type="checkbox"
         id={id}
